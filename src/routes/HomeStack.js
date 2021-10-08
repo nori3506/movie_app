@@ -1,59 +1,28 @@
-import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import IndexScreen from "../screen/IndexScreen";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import Indexscreen from "../screen/IndexScreen";
-import Searchscreen from "../screen/SearchScreen";
-import Tvshowscreen from "../screen/TvshowScreen";
+import ShowScreen from "../screen/ShowScreen";
 
-const Tab = createMaterialTopTabNavigator();
 const Stack = createNativeStackNavigator();
 
-export default function HomeStack() {
+export default function HomeStack({ navigation }) {
   return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen
-          name="Index"
-          component={IndexScreen}
-          options={{
-            title: "Movies App",
-            headerStyle: {
-              backgroundColor: "#2c3e50",
-            },
-            headerTitleStyle: {
-              color: "#fff",
-            },
-          }}
-        ></Tab.Screen>
-        <Tab.Screen
-          name="Search"
-          component={Searchscreen}
-          options={{
-            title: "Search Results",
-            headerStyle: {
-              backgroundColor: "#2c3e50",
-            },
-            headerTitleStyle: {
-              color: "#fff",
-            },
-          }}
-        ></Tab.Screen>
-        <Tab.Screen
-          name="Tv"
-          component={Tvshowscreen}
-          options={{
-            title: "TV Shows",
-            headerStyle: {
-              backgroundColor: "#2c3e50",
-            },
-            headerTitleStyle: {
-              color: "#fff",
-            },
-          }}
-        ></Tab.Screen>
-      </Tab.Navigator>
-    </NavigationContainer>
+    <Stack.Navigator initialRouteName="Index">
+      <Stack.Screen
+        name="Index"
+        component={IndexScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Show"
+        component={ShowScreen}
+        options={({ route }) => ({
+          title: route.params.title,
+          headerBackTitle: "Back to List",
+        })}
+      />
+    </Stack.Navigator>
   );
 }

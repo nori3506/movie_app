@@ -1,12 +1,9 @@
 import { View, Text } from "native-base";
 import React from "react";
+import SearchContainer from "../containers/SearchContainer";
 
-const Searchscreen = () => {
-  return (
-    <View>
-      <Text>Search</Text>
-    </View>
-  );
+const Searchscreen = ({ navigation }) => {
+  return <SearchContainer navigation={navigation} />;
 };
 
 export default Searchscreen;

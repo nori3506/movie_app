@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text } from "react-native";
 import Movieslist from "../lists/MoviesList";
 import { getMovies } from "../services/api";
+import RNPickerSelect from "react-native-picker-select";
 
 const Moviescontainer = ({ navigation }) => {
   const [movies, setMovies] = useState([]);
@@ -11,39 +12,39 @@ const Moviescontainer = ({ navigation }) => {
     const fetchMovies = getMovies("now_playing");
     fetchMovies.then((res) => {
       setIsLoading(true);
-      console.log("REEEE", res[0].original_title);
+      console.log("REEEE", res);
       setMovies(res);
     });
   }, []);
 
   const fetchMoviesHandler = (e) => {
-    const fetchMovies = getMovies(e.target.value);
+    const fetchMovies = getMovies(e);
     fetchMovies.then((res) => {
       setIsLoading(true);
-      console.log("REEEE", res[0].original_title);
       setMovies(res);
     });
   };
 
   return (
     <View>
-      <select onChange={fetchMoviesHandler}>
-        <option value="now_playing">now playing</option>
-        <option value="popular">popular</option>
-        <option value="top_rated">top rated</option>
-        <option value="upcoming">upcoming</option>
-      </select>
-      <View>
-        {!isLoading ? (
-          <Text>unko</Text>
-        ) : (
-          <View>
-            <Text>
-              <Movieslist navigatio={navigation} movies={movies} />
-            </Text>
-          </View>
-        )}
-      </View>
+      <RNPickerSelect
+        onValueChange={(value) => fetchMoviesHandler(value)}
+        items={[
+          { label: "now playing", value: "now_playing" },
+          { label: "popular", value: "popular" },
+          { label: "top_rated", value: "top_rated" },
+          { label: "upcoming", value: "upcoming" },
+        ]}
+      />
+      {!isLoading ? (
+        <Text>Loading</Text>
+      ) : (
+        <View>
+          <Text>
+            <Movieslist type="movie" navigation={navigation} movies={movies} />
+          </Text>
+        </View>
+      )}
     </View>
   );
 };
