@@ -1,12 +1,10 @@
 import { Image } from "native-base";
 import React, { useState, useEffect } from "react";
-import { Text, View } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 import { BASE_IMAGE_URL } from "../config/api_config";
 import { getMovie } from "../services/api";
 
 const Showcontainer = ({ route, navigation }) => {
-  const { id } = route.params;
-  console.log(route.params.id);
   const [movie, setMovie] = useState("");
 
   useEffect(() => {
@@ -18,13 +16,14 @@ const Showcontainer = ({ route, navigation }) => {
   }, []);
 
   return (
-    <View>
+    <View style={styles.container}>
       {movie ? (
         <View>
-          <Text> {movie.title || movie.name}</Text>
+          <Text style={styles.title}> {movie.title || movie.name}</Text>
           <Image
+            style={styles.image}
             alt={movie.title}
-            source={{ uri: BASE_IMAGE_URL + movie.backdrop_path }}
+            source={{ uri: BASE_IMAGE_URL + movie.poster_path }}
             size={"2xl"}
           />
           <Text>{movie.overview}</Text>
@@ -40,5 +39,23 @@ const Showcontainer = ({ route, navigation }) => {
     </View>
   );
 };
+const styles = StyleSheet.create({
+  container: {
+    paddingLeft: 30,
+    paddingRight: 30,
+    paddingTop: 40,
+  },
+  title: {
+    fontWeight: "bold",
+    fontSize: 30,
+    textAlign: "center",
+  },
+  image: {
+    marginTop: 40,
+    marginBottom: 30,
+    marginLeft: "auto",
+    marginRight: "auto",
+  },
+});
 
 export default Showcontainer;

@@ -9,54 +9,32 @@ import SearchScreen from "./src/screen/SearchScreen.js";
 import Tvshowscreen from "./src/screen/TvshowScreen";
 import SearchStack from "./src/routes/SearchStack";
 import TvshowStack from "./src/routes/TvshowStack";
+
 const Tab = createMaterialTopTabNavigator();
 const Stack = createNativeStackNavigator();
-
+import Tabs from "./src/routes/Tabs";
+import Showscreen from "./src/screen/ShowScreen.js";
 export default function App() {
   return (
     <NativeBaseProvider>
       <NavigationContainer>
-        <Tab.Navigator>
-          <Tab.Screen
+        <Stack.Navigator initialRouteName="Index">
+          <Stack.Screen
             name="Index"
-            component={HomeStack}
+            component={Tabs}
             options={{
-              title: "Movies",
-              headerStyle: {
-                backgroundColor: "#2c3e50",
-              },
-              headerTitleStyle: {
-                color: "#fff",
-              },
+              headerShown: false,
             }}
-          ></Tab.Screen>
-          <Tab.Screen
-            name="Search"
-            component={SearchStack}
-            options={{
-              title: "Search Results",
-              headerStyle: {
-                backgroundColor: "#2c3e50",
-              },
-              headerTitleStyle: {
-                color: "#fff",
-              },
-            }}
-          ></Tab.Screen>
-          <Tab.Screen
-            name="Tv"
-            component={TvshowStack}
-            options={{
-              title: "TV Shows",
-              headerStyle: {
-                backgroundColor: "#2c3e50",
-              },
-              headerTitleStyle: {
-                color: "#fff",
-              },
-            }}
-          ></Tab.Screen>
-        </Tab.Navigator>
+          />
+          <Stack.Screen
+            name="Show"
+            component={Showscreen}
+            options={({ route }) => ({
+              title: route.params.title,
+              headerBackTitle: "Back to List",
+            })}
+          />
+        </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>
   );
