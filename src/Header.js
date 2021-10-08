@@ -1,25 +1,23 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { HStack, Text, Box, StatusBar } from "native-base";
 
-export default function Header() {
+export default () => {
   return (
-    <View style={styles.view}>
-      <Text style={styles.text}>Movies App</Text>
-    </View>
+    <>
+      <StatusBar backgroundColor="#2c3e50" barStyle="light-content" />
+      <Box safeAreaTop backgroundColor="#2c3e50">
+        <HStack
+          bg="#2c3e50"
+          px={1}
+          py={3}
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Text color="#fff" fontSize={20} fontWeight="bold">
+            Movies App
+          </Text>
+        </HStack>
+      </Box>
+    </>
   );
-}
-
-const styles = StyleSheet.create({
-  view: {
-    width: "100%",
-    height: 50,
-    backgroundColor: "#00f",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  text: {
-    fontSize: 25,
-    fontWeight: "bold",
-    color: "#ffffff",
-  },
-});
+};

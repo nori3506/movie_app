@@ -1,4 +1,3 @@
-import React from "react";
 import axios from "axios";
 import { APP_KEY, BASE_URL } from "../config/api_config";
 import qs from "qs";

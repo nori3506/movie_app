@@ -1,7 +1,5 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
-import IndexScreen from "../screen/IndexScreen";
-import SearchScreen from "../screen/SearchScreen";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Tvshowscreen from "../screen/TvshowScreen";
 
 const Stack = createNativeStackNavigator();
