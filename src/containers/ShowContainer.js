@@ -1,4 +1,12 @@
-import { Image, Heading, Text, View } from "native-base";
+import {
+  Image,
+  Heading,
+  Text,
+  View,
+  VStack,
+  Divider,
+  HStack,
+} from "native-base";
 import React, { useState, useEffect } from "react";
 import { BASE_IMAGE_URL } from "../config/api_config";
 import { getMovie } from "../services/api";
@@ -14,27 +22,27 @@ const Showcontainer = ({ route, navigation }) => {
   }, []);
 
   return (
-    <View>
+    <View px={4}>
       {movie ? (
-        <View>
-          <Heading textAlign="center" mt="60">
-            {" "}
-            {movie.title || movie.name}
-          </Heading>
-          <Image
-            alt={movie.title}
-            source={{ uri: BASE_IMAGE_URL + movie.poster_path }}
-            size={"2xl"}
-            mt="60"
-            margin="auto"
-          />
-          <Text px="6" mt="8">
-            {movie.overview}
-          </Text>
-          <Text px="6" my="5">
-            Popularity: {movie.popularity} | Release Date: {movie.release_date}
-          </Text>
-        </View>
+        <>
+          <VStack space={4} my={1} alignItems="center">
+            <Heading textAlign="center" mt="10">
+              {movie.title || movie.name}
+            </Heading>
+            <Image
+              alt={movie.title}
+              source={{ uri: BASE_IMAGE_URL + movie.poster_path }}
+              size={"2xl"}
+            />
+          </VStack>
+          <VStack space={3} my={4}>
+            <Text>{movie.overview}</Text>
+            <Text>
+              Popularity: {movie.popularity} | Release Date:{" "}
+              {movie.release_date}
+            </Text>
+          </VStack>
+        </>
       ) : (
         <View>
           <Text>Loading...</Text>
